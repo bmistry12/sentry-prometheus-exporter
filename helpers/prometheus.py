@@ -227,6 +227,7 @@ class SentryCollector(object):
                         proj=project.get("slug"), env=env
                     )
                 )
+
                 project_issues_1h = project_issues.get(env).get("1h")
                 project_issues_24h = project_issues.get(env).get("24h")
                 project_issues_14d = project_issues.get(env).get("14d")
@@ -235,17 +236,14 @@ class SentryCollector(object):
                 events_24h = 0
                 events_14d = 0
 
-                if project_issues_1h:
-                    for issue in project_issues_1h:
-                        events_1h += int(issue.get("count") or 0)
+                for issue in project_issues_1h:
+                    events_1h += int(issue.get("count") or 0)
 
-                if project_issues_24h:
-                    for issue in project_issues_24h:
-                        events_24h += int(issue.get("count") or 0)
+                for issue in project_issues_24h:
+                    events_24h += int(issue.get("count") or 0)
 
-                if project_issues_14d:
-                    for issue in project_issues_14d:
-                        events_14d += int(issue.get("count") or 0)
+                for issue in project_issues_14d:
+                    events_14d += int(issue.get("count") or 0)
 
                 sum_events = events_1h + events_24h + events_14d
 
