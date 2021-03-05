@@ -227,23 +227,28 @@ class SentryCollector(object):
                         proj=project.get("slug"), env=env
                     )
                 )
-                project_issues_1h = project_issues.get(env).get("1h")
-                project_issues_24h = project_issues.get(env).get("24h")
-                project_issues_14d = project_issues.get(env).get("14d")
+                project_issues_1h = project_issues_24h = project_issues_14d = []
+
+                if "1h" in project_issues:
+                    project_issues_1h = project_issues.get(env).get("1h")
+                if "24h" in project_issues:
+                    project_issues_24h = project_issues.get(env).get("24h")
+                if "14d" in project_issues:
+                    project_issues_14d = project_issues.get(env).get("14d")
 
                 events_1h = 0
                 events_24h = 0
                 events_14d = 0
 
-                if project_issues_1h:
+                if project_issues_1h and type(project_issues_1h) != dict:
                     for issue in project_issues_1h:
                         events_1h += int(issue.get("count") or 0)
 
-                if project_issues_24h:
+                if project_issues_24h and type(project_issues_24h) != dict:
                     for issue in project_issues_24h:
                         events_24h += int(issue.get("count") or 0)
 
-                if project_issues_14d:
+                if project_issues_14d and type(project_issues_14d) != dict:
                     for issue in project_issues_14d:
                         events_14d += int(issue.get("count") or 0)
 
