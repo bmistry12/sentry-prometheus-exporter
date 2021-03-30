@@ -175,7 +175,7 @@ class SentryCollector(object):
                             self.org.get("slug"), project, env, age="14d"
                         )
 
-                    log.debug("data structure: building projects issues data"):
+                    log.debug("data structure: building projects issues data")
                     for k, v in project_issues_1h.items():
                         projects_issue_data[project.get("slug")][k] = {"1h": v}
 
